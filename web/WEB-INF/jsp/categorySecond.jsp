@@ -15,6 +15,12 @@
     <link href="./css/product.css" rel="stylesheet" type="text/css"/>
 
 </head>
+<script type="text/javascript" language="JavaScript">
+    function pageSkip(){
+
+    }
+
+</script>
 <body>
 <div class="container header">
     <div class="span5">
@@ -31,6 +37,7 @@
 
     <%@include file="mune.jsp"%>
 
+    <%--二级分类--%>
 </div>
 <div class="container productList">
     <div class="span6">
@@ -38,11 +45,11 @@
             <c:forEach items="${categoryList}" var="category">
             <dl>
                 <dt>
-                    <a href="./image/蔬菜 - Powered By Mango Team.htm">${category.cname}</a>
+                    <a href="${pageContext.request.contextPath}/categorySecond.action?cid=${category.cid}&pageNow=1">${category.cname}</a>
                 </dt>
                 <c:forEach items="${category.categorySeconds}" var="categorySecond">
                     <dd>
-                        <a >${categorySecond.csname}</a>
+                        <a href="${pageContext.request.contextPath}/categorySecond_findByCsid.action?csid=${categorySecond.csid}&pageNow=1">${categorySecond.csname}</a>
                     </dd>
                 </c:forEach>
             </dl>
@@ -62,9 +69,10 @@
 
             <div id="result" class="result table clearfix">
                 <ul>
-                    <c:forEach items="${pageBena.List}" var="product">
+                    <c:forEach items="${pageBean.list}" var="product">
+
                     <li>
-                        <a href="./京华商城分页面.htm">
+                        <a href="${pageContext.request.contextPath}/product_showProduct.action?pid=${product.pid}">
                             <img src="./${product.image}" width="170" height="170"  style="display: inline-block;">
 
                             <span style='color:green'>
@@ -80,14 +88,23 @@
                     </c:forEach>
                 </ul>
             </div>
+            <%--导航条--%>
             <div class="pagination">
-                <span class="firstPage">&nbsp;</span>
-                <span class="previousPage">&nbsp;</span>
-                <span class="currentPage">1</span>
-                <a href="javascript: $.pageSkip(2);">2</a>
-                <a class="nextPage" href="javascript: $.pageSkip(2);">&nbsp;</a>
+                <a class="firstPage" href="${pageContext.request.contextPath}/categorySecond.action?cid=${cid}&pageNow=1">&nbsp;</a>
+                <c:if test="${pageBean.pageNow>1}">
+                    <a class="previousPage" href="${pageContext.request.contextPath}/categorySecond.action?cid=${cid}&pageNow=${pageBean.pageNow-1}">&nbsp;</a>
+                </c:if>
 
-                <a class="lastPage" href="javascript: $.pageSkip(2);">&nbsp;</a>
+                <c:forEach  begin="1" end="${pageBean.pageCount}" var="i">
+                <%--<span class="currentPage">1</span>--%>
+                <a href="${pageContext.request.contextPath}/categorySecond.action?cid=${cid}&pageNow=${i}">${i}</a>
+                </c:forEach>
+
+                <c:if test="${pageBean.pageNow<pageBean.pageCount}">
+                    <a class="nextPage" href="${pageContext.request.contextPath}/categorySecond.action?cid=${cid}&pageNow=${pageBean.pageNow+1}">&nbsp;</a>
+                </c:if>
+
+                <a class="lastPage" href="${pageContext.request.contextPath}/categorySecond.action?cid=${cid}&pageNow=${pageBean.pageCount}">&nbsp;</a>
             </div>
         </form>
     </div>

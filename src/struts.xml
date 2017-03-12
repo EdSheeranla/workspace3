@@ -26,7 +26,7 @@
         <action name="product_*" class="com.hjy.shop.action.ProductAction" method="{1}">
             <result name="{1}">/WEB-INF/jsp/product.jsp</result>
         </action>
-        <action name="categorySecond_*" class="com.hjy.shop.action.CategorySecondAction">
+        <action name="categorySecond_*" class="com.hjy.shop.action.CategorySecondAction" method="{1}">
             <result >/WEB-INF/jsp/categorySecond.jsp</result>
         </action>
         <action name="checkcode" class="com.hjy.shop.action.CheckCodeAction"/>

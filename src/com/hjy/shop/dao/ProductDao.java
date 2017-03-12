@@ -40,8 +40,6 @@ public class ProductDao {
         Session session=hibernateTemplate.getSessionFactory().getCurrentSession();
         Query query = session.createQuery("from Product where pid = 1 ");
         Product producte= (Product) query.uniqueResult();
-        System.out.println(producte.getImage());
-
     }
 
     public List<Product> queryLastProductByPage() {
@@ -53,14 +51,12 @@ public class ProductDao {
 
     public Product queryById(Integer pid) {
         Product product = hibernateTemplate.get(Product.class,pid);
-        System.out.println(product.getPname()+product.getPid());
         return product;
     }
 
-    public int queryPageCount(Integer cid) {
+    public int queryPageCount(String hql,Integer id) {
         int columnCount=0;
-        String hql="select count(*) from Product p where  p.categorySecond.category.cid = ?" ;
-        List list=hibernateTemplate.find(hql,cid);
+        List list=hibernateTemplate.find(hql,id);
         if(list.size()==0||list==null){
             columnCount=0;
         }else {
@@ -70,12 +66,13 @@ public class ProductDao {
         return columnCount;
     }
 
-    public List<Product> queryProductByPage(Integer pageNow,Integer pageSize,Integer cid) {
-        String hql = "select p from Product p join p.categorySecond cs join cs.category c where c.cid = ?";
+    public List<Product> queryProductByPage(String hql,Integer pageNow,Integer pageSize,Integer cid) {
         int start  =  (pageNow-1)*pageSize;
-        int end = pageNow*pageSize;
+        int end = pageSize;
         String[] parameters={cid+""};
         List<Product> list=hibernateTemplate.execute(new HibernateCallBackUtil<Product>(start,end,hql,parameters));
         return list;
     }
+
+
 }

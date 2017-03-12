@@ -16,4 +16,6 @@ public interface ProductService {
     Product queryById(Integer pid);
 
     PageBean<Product> queryProductByPage(Integer pageNow,Integer cid);
+
+    PageBean<Product> queryProductByPageCsid(int pageNow,int csid);
 }

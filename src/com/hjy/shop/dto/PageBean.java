@@ -11,7 +11,7 @@ public class PageBean<T> {
     private Integer pageSize;
     private Integer pageCount;
     private Integer columnCount;
-    private List<T> List;
+    private List<T> list;
 
     public Integer getPageNow() {
         return pageNow;
@@ -46,10 +46,10 @@ public class PageBean<T> {
     }
 
     public java.util.List<T> getList() {
-        return List;
+        return list;
     }
 
     public void setList(java.util.List<T> list) {
-        List = list;
+        this.list = list;
     }
 }

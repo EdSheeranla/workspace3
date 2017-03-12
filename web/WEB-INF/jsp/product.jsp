@@ -34,156 +34,18 @@
 </div><div class="container productContent">
     <div class="span6">
         <div class="hotProductCategory">
-            <dl>
-                <dt>
-                    <a href="蔬菜分类.htm">蔬菜</a>
-                </dt>
-                <dd>
-                    <a >无公害蔬菜</a>
-                </dd>
-                <dd>
-                    <a>特菜类</a>
-                </dd>
-                <dd>
-                    <a>有机蔬菜</a>
-                </dd>
-                <dd>
-                    <a>蔬菜套餐</a>
-                </dd>
-            </dl>
-            <dl>
-                <dt>
-                    <a>水果</a>
-                </dt>
-                <dd>
-                    <a>国产</a>
-                </dd>
-                <dd>
-                    <a>进口</a>
-                </dd>
-
-            </dl>
-            <dl>
-                <dt>
-                    <a >肉类</a>
-                </dt>
-                <dd>
-                    <a>猪肉</a>
-                </dd>
-                <dd>
-                    <a>牛羊肉</a>
-                </dd>
-                <dd>
-                    <a>家禽</a>
-                </dd>
-                <dd>
-                    <a>鱼</a>
-                </dd>
-            </dl>
-            <dl>
-                <dt>
-                    <a>蛋、奶及肉制品类</a>
-                </dt>
-                <dd>
-                    <a>蛋</a>
-                </dd>
-                <dd>
-                    <a>奶</a>
-                </dd>
-                <dd>
-                    <a>豆制品</a>
-                </dd>
-            </dl>
-            <dl>
-                <dt>
-                    <a >干果</a>
-                </dt>
-                <dd>
-                    <a>干制坚果</a>
-                </dd>
-                <dd>
-                    <a>干制果实/果肉</a>
-                </dd>
-                <dd>
-                    <a >干制种仁</a>
-                </dd>
-                <dd>
-                    <a>    </a>
-                </dd>
-            </dl>
-            <dl>
-                <dt>
-                    <a >古薯杂粮</a>
-                </dt>
-                <dd>
-                    <a >米类</a>
-                </dd>
-                <dd>
-                    <a>杂粮</a>
-                </dd>
-                <dd>
-                    <a>面粉</a>
-                </dd>
-                <dd>
-                    <a >薯类</a>
-                </dd>
-            </dl>
-            <dl>
-                <dt>
-                    <a>油</a>
-                </dt>
-                <dd>
-                    <a >茶油</a>
-                </dd>
-                <dd>
-                    <a >核桃油</a>
-                </dd>
-                <dd>
-                    <a >橄榄油</a>
-                </dd>
-                <dd>
-                    <a>芥花籽油</a>
-                </dd>
-            </dl>
-            <dl>
-                <dt>
-                    <a>水、软饮</a>
-                </dt>
-                <dd>
-                    <a >水</a>
-                </dd>
-                <dd>
-                    <a>软饮</a>
-                </dd>
-            </dl>
-            <dl>
-                <dt>
-                    <a >茶</a>
-                </dt>
-                <dd>
-                    <a >绿茶</a>
-                </dd>
-                <dd>
-                    <a>红茶</a>
-                </dd>
-                <dd>
-                    <a >乌龙茶</a>
-                </dd>
-                <dd>
-                    <a>白茶</a>
-                </dd>
-            </dl>
-            <dl class="last">
-                <dt>
-                    <a>亿家卡</a>
-                </dt>
-                <dd>
-                    <a >亿家卡</a>
-                </dd>
-                <dd>
-                    <a>    </a>
-                </dd>
-            </dl>
+            <c:forEach items="${categoryList}" var="category">
+                <dl>
+                    <dt>
+                        <a href="${pageContext.request.contextPath}/categorySecond.action?cid=${category.cid}&pageNow=1">${category.cname}</a>
+                    </dt>
+                    <c:forEach items="${category.categorySeconds}" var="categorySecond">
+                        <dd>
+                            <a href="${pageContext.request.contextPath}/categorySecond_findByCsid.action?csid=${categorySecond.csid}&pageNow=1">${categorySecond.csname}</a>
+                        </dd>
+                    </c:forEach>
+                </dl>
+            </c:forEach>
         </div>
 
 

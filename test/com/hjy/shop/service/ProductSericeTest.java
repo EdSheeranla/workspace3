@@ -3,6 +3,7 @@ package com.hjy.shop.service;
 import com.hjy.shop.dao.ProductDao;
 import com.hjy.shop.entity.Product;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -40,6 +41,12 @@ public class ProductSericeTest {
     public void testQueryCount(){
         ApplicationContext ac=new ClassPathXmlApplicationContext("applicationContext.xml");
         ProductDao productDao= (ProductDao) ac.getBean("productDao");
-        System.out.println(productDao.queryPageCount(1));
+//        System.out.println(productDao.queryPageCount(1));
+    }
+    @Ignore
+    public void testHql(){
+        ApplicationContext ac=new ClassPathXmlApplicationContext("applicationContext.xml");
+        ProductDao productDao= (ProductDao) ac.getBean("productDao");
+
     }
 }

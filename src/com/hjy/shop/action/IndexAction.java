@@ -41,8 +41,10 @@ public class IndexAction extends ActionSupport {
     }
 
     public String execute(){
-        List<Category> categoryList = categoryService.queryAll();
-        ServletActionContext.getRequest().getSession().setAttribute("categoryList",categoryList);
+        if(ActionContext.getContext().getSession().get("categoryList")==null){
+            List<Category> categoryList = categoryService.queryAll();
+            ServletActionContext.getRequest().getSession().setAttribute("categoryList",categoryList);
+        }
         List<Product> hotproductList=productService.queryHotProduct();
         //这里向其中valuestack中添加了热门商品的信息，
         ActionContext.getContext().getValueStack().set("hotproductList",hotproductList);

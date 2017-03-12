@@ -8,6 +8,7 @@ import com.hjy.shop.service.ProductService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -18,6 +19,7 @@ import java.util.Set;
  * Created by admin on 2017/3/11.
  */
 @Component("productAction")
+@Scope("prototype")
 public class ProductAction extends ActionSupport implements ModelDriven<Product> {
     private Product product=new Product();
     private ProductService productService;

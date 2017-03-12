@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--引入外部属性文件-->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+
+    <!--这里配置的是自动扫描事务-->
+    <context:annotation-config></context:annotation-config>
+    <context:component-scan base-package="com.hjy.shop" />
+
+    <!--配置c3p0datasource-->
+    <bean name="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${driverClass}"/>
+        <property name="jdbcUrl" value="${jdbcUrl}"/>
+        <property name="user" value="${user}"/>
+        <property name="password" value="${password}"/>
+    </bean>
+
+
+    <bean name="SessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mappingResources">
+            <list>
+                <!--<value>com.hjy.shop.entity.Category</value>-->
+                <!--<value>com.hjy.shop.entity.CategorySecond</value>-->
+                <!--<value>com.hjy.shop.entity.Product</value>-->
+                <!--<value>com.hjy.shop.entity.User</value>-->
+                <value>com/hjy/shop/entity/Product.hbm.xml</value>
+                <value>com/hjy/shop/entity/Category.hbm.xml</value>
+                <value>com/hjy/shop/entity/CategorySecond.hbm.xml</value>
+                <value>com/hjy/shop/entity/User.hbm.xml</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <value>
+                hibernate.dialect=org.hibernate.dialect.MySQLDialect
+                hibernate.show_sql=true
+                hibernate.hbm2ddl.auto=update
+            </value>
+        </property>
+    </bean>
+
+    <!--配置HiberanteTemplate，注意要和SessionFactory关联-->
+    <bean name="hibernateTemplate" class="org.springframework.orm.hibernate4.HibernateTemplate">
+        <property name="sessionFactory" ref="SessionFactory"/>
+    </bean>
+
+    <bean id="transactionManager"
+          class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="SessionFactory" ref="SessionFactory"/>
+    </bean>
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <!--这里配置的是使用xml方法来管理事务-->
+    <!--<tx:advice id="transactionInterceptor" transaction-manager="transactionManager">-->
+        <!--<tx:attributes>-->
+            <!--<tx:method name="*" propagation="REQUIRED"/>-->
+        <!--</tx:attributes>-->
+    <!--</tx:advice>-->
+    <!--<aop:config>-->
+        <!--<aop:pointcut id="userTransactionManager" expression="execution(public * com.hjy.service.impl.*.*(..))"/>-->
+        <!--<aop:advisor advice-ref="transactionInterceptor" pointcut-ref="userTransactionManager"/>-->
+    <!--</aop:config>-->
+</beans>

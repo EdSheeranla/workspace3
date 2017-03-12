@@ -1,0 +1,116 @@
+package com.hjy.shop.action;
+
+import com.hjy.shop.entity.User;
+import com.hjy.shop.service.UserService;
+import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.ModelDriven;
+import org.apache.struts2.ServletActionContext;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+
+/**
+ * Created by admin on 2017/3/8.
+ */
+@Component("userAction")
+@Scope("prototype")
+public class UserAction extends ActionSupport implements ModelDriven {
+    private UserService userService;
+    private String captcha;
+
+    public String getCaptcha() {
+        return captcha;
+    }
+
+    public void setCaptcha(String captcha) {
+        this.captcha = captcha;
+    }
+
+    /**
+     * 这里没有使用DTO而是直接使用了entity对象来进行封装
+     */
+    private User user = new User();
+
+    public UserService getUserService() {
+        return userService;
+    }
+
+    @Resource
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+    public String registerPage() {
+        return "registerPage";
+    }
+
+    public String loginPage() {
+        return "loginPage";
+    }
+
+    /**
+     * AJAX进行异步校验
+     */
+    public String findByName() throws IOException {
+        User existUser = userService.findByUserName(user.getUsername());
+        ServletResponse response=ServletActionContext.getResponse();
+        response.setContentType("text/html;charset=utf-8");
+        if (existUser == null) {
+            response.getWriter().println("<font color='green'>用户名可以使用</font>");
+        }else{
+            response.getWriter().println("<font color='red'>用户名已经存在</font>");
+        }
+        return NONE;
+    }
+
+    public String register() {
+        userService.register(user);
+        return "registerOk";
+    }
+
+    /**
+     * 根据邮箱来激活用户的账号
+     */
+    public String active(){
+        userService.active(user.getCode());
+        return SUCCESS;
+    }
+
+    /**
+     *完成用户登陆操作
+     */
+    public String login(){
+        HttpSession session=ServletActionContext.getRequest().getSession();
+        String checkcode= (String) session.getAttribute("checkcode");
+        System.out.println(captcha+"     "+checkcode);
+        if(!captcha.equalsIgnoreCase(checkcode)){
+            this.addActionError("验证码错误");
+            return "loginfail";
+        }
+        User loginUser=userService.login(user);
+        if(loginUser!=null){
+            session.setAttribute("loginUser",loginUser);
+            return "loginsuccess";
+        }else {
+            this.addActionError("用户名或密码错误");
+            return "loginfail";
+        }
+    }
+
+    /**
+     * 用户退出登陆操作
+     */
+    public String logout(){
+        ServletActionContext.getRequest().getSession().invalidate();
+
+        return "logout";
+    }
+    public Object getModel() {
+        return user;
+    }
+}

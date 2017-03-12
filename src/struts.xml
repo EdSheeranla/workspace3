@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+
+    <!--首页面action-->
+    <package name="index" namespace="/" extends="struts-default">
+
+
+        <action name="index_*" class="com.hjy.shop.action.IndexAction" method="{1}">
+            <result>/WEB-INF/jsp/index.jsp</result>
+        </action>
+        <action name="user_*" class="com.hjy.shop.action.UserAction" method="{1}">
+            <result name="{1}">/WEB-INF/jsp/{1}.jsp</result>
+            <result name="input">/WEB-INF/jsp/registerPage.jsp</result>
+            <result >/WEB-INF/jsp/loginPage.jsp</result>
+            <result name="registerOk">/WEB-INF/jsp/mes.jsp</result>
+            <result name="loginsuccess" type="redirectAction">index.action</result>
+            <result name="loginfail">/WEB-INF/jsp/loginPage.jsp</result>
+            <result name="logout" type="redirectAction">index.action</result>
+        </action>
+        <action name="shop_*" class="com.hjy.shop.action.ShopAction" method="{1}">
+            <result name="{1}">/WEB-INF/jsp/{1}.jsp</result>
+        </action>
+        <action name="product_*" class="com.hjy.shop.action.ProductAction" method="{1}">
+            <result name="{1}">/WEB-INF/jsp/product.jsp</result>
+        </action>
+        <action name="categorySecond_*" class="com.hjy.shop.action.CategorySecondAction">
+            <result >/WEB-INF/jsp/categorySecond.jsp</result>
+        </action>
+        <action name="checkcode" class="com.hjy.shop.action.CheckCodeAction"/>
+
+    </package>
+</struts>

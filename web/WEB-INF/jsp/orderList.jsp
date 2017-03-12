@@ -10,7 +10,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-    <title>订单页面</title>
+    <title>我的订单</title>
     <link href="./css/common.css" rel="stylesheet" type="text/css"/>
     <link href="./css/cart.css" rel="stylesheet" type="text/css"/>
 
@@ -49,6 +49,25 @@
 
         <table>
             <tbody>
+            <c:forEach items="${pageBean.list}" var="order">
+            <tr>
+                <td colspan="5">订单编号：${order.oid }&nbsp;&nbsp;&nbsp;&nbsp;订单状态:
+                <c:choose>
+                    <c:when test="${order.state==1}">
+                        <font color="red">未付款</font>
+                    </c:when>
+                    <c:when test="${order.state==2}">
+                        已付款
+                    </c:when>
+                    <c:when test="${order.state==3}">
+                        已发货
+                    </c:when>
+                    <c:otherwise>
+                        已收货
+                    </c:otherwise>
+                </c:choose>
+                </td>
+            </tr>
             <tr>
                 <th>图片</th>
                 <th>商品</th>
@@ -85,55 +104,30 @@
                 </td>
             </tr>
             </c:forEach>
+            </c:forEach>
             </tbody>
+            <%--导航条--%>
+            <div class="pagination">
+                <a class="firstPage" href="${pageContext.request.contextPath}/order_showMyOrder.action?pageNow=1">&nbsp;</a>
+                <c:if test="${pageBean.pageNow>1}">
+                    <a class="previousPage" href="${pageContext.request.contextPath}/order_showMyOrder.action?pageNow=${pageBean.pageNow-1}">&nbsp;</a>
+                </c:if>
+
+                <c:forEach  begin="1" end="${pageBean.pageCount}" var="i">
+                    <%--<span class="currentPage">1</span>--%>
+                    <a href="${pageContext.request.contextPath}/order_showMyOrder.action?pageNow=${i}">${i}</a>
+                </c:forEach>
+
+                <c:if test="${pageBean.pageNow<pageBean.pageCount}">
+                    <a class="nextPage" href="${pageContext.request.contextPath}/order_showMyOrder.action?pageNow=${pageBean.pageNow+1}">&nbsp;</a>
+                </c:if>
+
+                <a class="lastPage" href="${pageContext.request.contextPath}/order_showMyOrder.action?pageNow=${pageBean.pageCount}">&nbsp;</a>
+            </div>
         </table>
         <dl id="giftItems" class="hidden" style="display: none;">
         </dl>
-        <div class="total">
-            <em id="promotion"></em>
-            商品金额: <strong id="effectivePrice">￥${order.total}元</strong>
-        </div>
-        <form id="orderForm" action="${pageContext.request.contextPath}/order_submit.action" method="post">
-            <input type="hidden" name="order.oid" value=""/>
-            <div class="span24">
-                <p>
-                    收货地址：<input name="order.user.addr" type="text" value="${order.address}" style="width:350px" />
-                    <br />
-                    收货人&nbsp;&nbsp;&nbsp;：<input name="order.user.username" type="text" value="${order.name}" style="width:150px" />
-                    <br />
-                    联系方式：<input name="order.user.phone" type="text"value="${order.telnum}" style="width:150px" />
 
-                </p>
-                <hr />
-                <p>
-                    选择银行：<br/>
-                    <input type="radio" name="pd_FrpId" value="ICBC-NET-B2C" checked="checked"/>工商银行
-                    <img src="./bank_img/icbc.bmp" align="middle"/>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="radio" name="pd_FrpId" value="BOC-NET-B2C"/>中国银行
-                    <img src="./bank_img/bc.bmp" align="middle"/>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="radio" name="pd_FrpId" value="ABC-NET-B2C"/>农业银行
-                    <img src="./bank_img/abc.bmp" align="middle"/>
-                    <br/>
-                    <input type="radio" name="pd_FrpId" value="BOCO-NET-B2C"/>交通银行
-                    <img src="./bank_img/bcc.bmp" align="middle"/>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="radio" name="pd_FrpId" value="PINGANBANK-NET"/>平安银行
-                    <img src="./bank_img/pingan.bmp" align="middle"/>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="radio" name="pd_FrpId" value="CCB-NET-B2C"/>建设银行
-                    <img src="./bank_img/ccb.bmp" align="middle"/>
-                    <br/>
-                    <input type="radio" name="pd_FrpId" value="CEB-NET-B2C"/>光大银行
-                    <img src="./bank_img/guangda.bmp" align="middle"/>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="radio" name="pd_FrpId" value="CMBCHINA-NET-B2C"/>招商银行
-                    <img src="./bank_img/cmb.bmp" align="middle"/>
-                </p>
-                <hr />
-                <p style="text-align:right">
-                    <a href="javascript:document.getElementById('orderForm').submit();">
-                        <img src="./images/finalbutton.gif" width="204" height="51" border="0" />
-                    </a>
-                </p>
-            </div>
-        </form>
     </div>
 
 </div>

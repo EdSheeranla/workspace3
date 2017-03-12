@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.hjy.shop.entity.Order" table="orders">
+        <id name="oid">
+            <generator class="increment"/>
+        </id>
+        <property name="name"/>
+        <property name="address"/>
+        <property name="ordertime"/>
+        <property name="telnum"/>
+        <property name="state"/>
+        <property name="total"/>
+        <many-to-one lazy="false" name="user" column="userid" class="com.hjy.shop.entity.User"/>
+        <set name="orderItemSet" cascade="all">
+            <key column="oid"></key>
+            <one-to-many class="com.hjy.shop.entity.OrderItem"></one-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

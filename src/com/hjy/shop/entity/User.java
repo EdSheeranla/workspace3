@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by admin on 2017/3/8.
@@ -21,6 +23,15 @@ public class User {
     private String telnum;
     private Integer state;
     private String code;
+    private Set<Order> orderSet=new HashSet<Order>();
+
+    public Set<Order> getOrderSet() {
+        return orderSet;
+    }
+
+    public void setOrderSet(Set<Order> orderSet) {
+        this.orderSet = orderSet;
+    }
 
     public User() {
     }

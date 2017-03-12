@@ -6,11 +6,11 @@
 
     <!--首页面action-->
     <package name="index" namespace="/" extends="struts-default">
-
-
+        <!--首页面模块-->
         <action name="index_*" class="com.hjy.shop.action.IndexAction" method="{1}">
             <result>/WEB-INF/jsp/index.jsp</result>
         </action>
+        <!--用户模块-->
         <action name="user_*" class="com.hjy.shop.action.UserAction" method="{1}">
             <result name="{1}">/WEB-INF/jsp/{1}.jsp</result>
             <result name="input">/WEB-INF/jsp/registerPage.jsp</result>
@@ -20,15 +20,22 @@
             <result name="loginfail">/WEB-INF/jsp/loginPage.jsp</result>
             <result name="logout" type="redirectAction">index.action</result>
         </action>
+        <!--购物模块-->
         <action name="shop_*" class="com.hjy.shop.action.ShopAction" method="{1}">
             <result name="{1}">/WEB-INF/jsp/cartPage.jsp</result>
             <result>/WEB-INF/jsp/cartPage.jsp</result>
+        </action>
+        <!--订单模块-->
+        <action name="order_*" class="com.hjy.shop.action.OrderAction" method="{1}">
             <result name="goLoginPage" type="redirectAction">user_loginPage.action</result>
             <result name="goOrderPage">/WEB-INF/jsp/orderPage.jsp</result>
+            <result name="showMyOrder">/WEB-INF/jsp/orderList.jsp</result>
         </action>
+        <!--商品模块-->
         <action name="product_*" class="com.hjy.shop.action.ProductAction" method="{1}">
             <result name="{1}">/WEB-INF/jsp/product.jsp</result>
         </action>
+        <!--二级分类模块-->
         <action name="categorySecond_*" class="com.hjy.shop.action.CategorySecondAction" method="{1}">
             <result >/WEB-INF/jsp/categorySecond.jsp</result>
         </action>

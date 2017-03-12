@@ -15,5 +15,9 @@
         <property name="telnum"/>
         <property name="password"/>
         <property name="state"/>
+        <set name="orderSet">
+            <key column="userid"></key>
+            <one-to-many class="com.hjy.shop.entity.Order"></one-to-many>
+        </set>
     </class>
 </hibernate-mapping>

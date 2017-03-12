@@ -70,14 +70,4 @@ public class ShopAction extends ActionSupport {
         return SUCCESS;
     }
 
-    /**
-     * 这里进行提交订单的处理
-     */
-    public String submitorder(){
-        User user = (User) ServletActionContext.getRequest().getSession().getAttribute("loginUser");
-//        if(user==null){
-//            return "goLoginPage";
-//        }
-        return "goOrderPage";
-    }
 }

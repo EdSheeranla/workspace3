@@ -82,7 +82,7 @@
         </div>
         <div class="bottom">
             <a href="${pageContext.request.contextPath}/shop_clear.action" id="clear" class="clear">清空购物车</a>
-            <a href="${pageContext.request.contextPath}/shop_submitorder.action" id="submit" class="submit">提交订单</a>
+            <a href="${pageContext.request.contextPath}/order_goOrderPage.action" id="submit" class="submit">提交订单</a>
         </div>
     </div>
 </div>

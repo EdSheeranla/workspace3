@@ -21,7 +21,7 @@
     <div class="span5">
         <div class="logo">
             <a href="http://localhost:8080/mango/">
-                <img src="./image/r___________renleipic_01/logo.gif" alt="传智播客">
+                <img src="./image/r___________renleipic_01/logo.gif" alt="啦啦啦">
             </a>
         </div>
     </div>
@@ -46,27 +46,29 @@
                 <th>小计</th>
                 <th>操作</th>
             </tr>
+            <c:forEach items="${shoppingCart.cartItems}" var="cartItem">
             <tr>
                 <td width="60">
                     <input type="hidden" name="id" value="22">
-                    <img src="./image/dadonggua.jpg">
+                    <img src="./${cartItem.product.image}">
                 </td>
                 <td>
-                    <a target="_blank"> 有机蔬菜      大冬瓜...</a>
+                    <a target="_blank"> ${cartItem.product.categorySecond.csname}      ${cartItem.product.pname}...</a>
                 </td>
                 <td>
-                    ￥298.00
+                    ${cartItem.product.shop_price}
                 </td>
                 <td class="quantity" width="60">
-                    1
+                    ${cartItem.count}
                 </td>
                 <td width="140">
-                    <span class="subtotal">￥596.00</span>
+                    <span class="subtotal">￥${cartItem.subtotal}</span>
                 </td>
                 <td>
-                    <a href="javascript:;" class="delete">删除</a>
+                    <a href="${pageContext.request.contextPath}/shop_remove.action?pid=${cartItem.product.pid}" class="delete">删除</a>
                 </td>
             </tr>
+            </c:forEach>
             </tbody></table>
         <dl id="giftItems" class="hidden" style="display: none;">
         </dl>
@@ -75,12 +77,12 @@
             <em>
                 登录后确认是否享有优惠
             </em>
-            赠送积分: <em id="effectivePoint">596</em>
-            商品金额: <strong id="effectivePrice">￥596.00元</strong>
+            赠送积分: <em id="effectivePoint">${shoppingCart.totalPrice}</em>
+            商品金额: <strong id="effectivePrice">￥${shoppingCart.totalPrice}元</strong>
         </div>
         <div class="bottom">
-            <a href="javascript:;" id="clear" class="clear">清空购物车</a>
-            <a href="会员登录.htm" id="submit" class="submit">提交订单</a>
+            <a href="${pageContext.request.contextPath}/shop_clear.action" id="clear" class="clear">清空购物车</a>
+            <a href="${pageContext.request.contextPath}/shop_submitorder.action" id="submit" class="submit">提交订单</a>
         </div>
     </div>
 </div>

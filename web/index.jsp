@@ -11,6 +11,6 @@
     <title>$Title$</title>
   </head>
   <body>
-  shop
+  <jsp:forward page="index.action"/>
   </body>
 </html>

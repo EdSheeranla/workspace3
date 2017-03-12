@@ -15,13 +15,16 @@
             <result name="{1}">/WEB-INF/jsp/{1}.jsp</result>
             <result name="input">/WEB-INF/jsp/registerPage.jsp</result>
             <result >/WEB-INF/jsp/loginPage.jsp</result>
-            <result name="registerOk">/WEB-INF/jsp/mes.jsp</result>
+            <result name="registerOk">/WEB-INF/jsp/msg.jsp</result>
             <result name="loginsuccess" type="redirectAction">index.action</result>
             <result name="loginfail">/WEB-INF/jsp/loginPage.jsp</result>
             <result name="logout" type="redirectAction">index.action</result>
         </action>
         <action name="shop_*" class="com.hjy.shop.action.ShopAction" method="{1}">
-            <result name="{1}">/WEB-INF/jsp/{1}.jsp</result>
+            <result name="{1}">/WEB-INF/jsp/cartPage.jsp</result>
+            <result>/WEB-INF/jsp/cartPage.jsp</result>
+            <result name="goLoginPage" type="redirectAction">user_loginPage.action</result>
+            <result name="goOrderPage">/WEB-INF/jsp/orderPage.jsp</result>
         </action>
         <action name="product_*" class="com.hjy.shop.action.ProductAction" method="{1}">
             <result name="{1}">/WEB-INF/jsp/product.jsp</result>

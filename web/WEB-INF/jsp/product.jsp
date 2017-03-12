@@ -20,7 +20,7 @@
     <div class="span5">
         <div class="logo">
             <a>
-                <img src="./image/r___________renleipic_01/logo.gif" alt="传智播客">
+                <img src="./image/r___________renleipic_01/logo.gif" alt="啦啦啦">
             </a>
         </div>
     </div>
@@ -85,14 +85,15 @@
             </dl>
         </div>
         <div class="action">
-
+            <form method="post" id="cartForm" action="${pageContext.request.contextPath}/shop_add.action">
             <dl class="quantity">
                 <dt>购买数量:</dt>
                 <dd>
-                    <input id="quantity" name="quantity" value="1" maxlength="4" onpaste="return false;" type="text">
+                    <input type="hidden" name="pid" value="${product.pid}">
+                    <input id="count" name="count" value="1" maxlength="4" onpaste="return false;" type="text">
                     <div>
-                        <span id="increase" class="increase">&nbsp;</span>
-                        <span id="decrease" class="decrease">&nbsp;</span>
+                        <span id="increase" class="increase" onclick="increaseNum()">&nbsp;</span>
+                        <span id="decrease" class="decrease" onclick="decreaseNum()">&nbsp;</span>
                     </div>
                 </dd>
                 <dd>
@@ -100,9 +101,10 @@
                 </dd>
             </dl>
             <div class="buy">
-                <input id="addCart" class="addCart" value="加入购物车" type="button">
-
+                <input id="addCart" class="addCart"  onclick="addToCart()" value="加入购物车" type="button">
             </div>
+
+            </form>
         </div>
         <div id="bar" class="bar">
             <ul>
@@ -176,5 +178,26 @@
         <div class="copyright">Copyright © 2005-2015 网上商城 版权所有</div>
     </div>
 </div>
+<script >
+    function addToCart(){
+        var cartForm=document.getElementById("cartForm");
+        cartForm.submit();
+    }
+    function increaseNum(){
+        var count = document.getElementById("count");
+        var num=parseInt(count.value);
+        num=num+1;
+        count.value=num;
+    }
+    function decreaseNum(){
+        var count = document.getElementById("count");
+        var num=parseInt(count.value);
+        if(num>1){
+            num=num-1;
+        }
+
+        count.value=num;
+    }
+</script>
 </body>
 </html>

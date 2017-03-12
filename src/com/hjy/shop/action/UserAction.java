@@ -69,7 +69,11 @@ public class UserAction extends ActionSupport implements ModelDriven {
     }
 
     public String register() {
-        userService.register(user);
+        try{
+            userService.register(user);
+        }catch (Exception e){
+            return "registerError";
+        }
         return "registerOk";
     }
 
@@ -87,7 +91,6 @@ public class UserAction extends ActionSupport implements ModelDriven {
     public String login(){
         HttpSession session=ServletActionContext.getRequest().getSession();
         String checkcode= (String) session.getAttribute("checkcode");
-        System.out.println(captcha+"     "+checkcode);
         if(!captcha.equalsIgnoreCase(checkcode)){
             this.addActionError("验证码错误");
             return "loginfail";

@@ -14,5 +14,6 @@
         <property name="email"/>
         <property name="telnum"/>
         <property name="password"/>
+        <property name="state"/>
     </class>
 </hibernate-mapping>

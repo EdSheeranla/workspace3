@@ -27,13 +27,17 @@ public class UserServcieImpl implements UserService {
     }
 
     public void register(User user) {
-        user.setState(0);
-        user.setCode(UUIDutil.getUUID()+UUIDutil.getUUID());
-        /**
-         * 这里发送邮件
-         */
-        MailUtil.sendMail(user.getEmail(),user.getCode());
-        userDao.add(user);
+        try{
+            user.setState(0);
+            user.setCode(UUIDutil.getUUID()+UUIDutil.getUUID());
+            /**
+             * 这里发送邮件
+             */
+            MailUtil.sendMail(user.getEmail(),user.getCode());
+            userDao.add(user);
+        }catch (Exception e){
+            throw new RuntimeException(e.getMessage());
+        }
     }
 
     public User findByUserName(String username) {

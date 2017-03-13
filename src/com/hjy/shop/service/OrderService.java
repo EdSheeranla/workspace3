@@ -12,5 +12,8 @@ public interface OrderService {
 
     PageBean<Order> showOrderByPage(Integer pageNow, Integer userid);
 
+    Order queryByOid(Integer oid);
+
+    Order update(Order order);
 }
 

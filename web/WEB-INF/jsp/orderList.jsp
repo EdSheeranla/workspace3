@@ -54,7 +54,7 @@
                 <td colspan="5">订单编号：${order.oid }&nbsp;&nbsp;&nbsp;&nbsp;订单状态:
                 <c:choose>
                     <c:when test="${order.state==1}">
-                        <font color="red">未付款</font>
+                        <font color="red">未付款</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="${pageContext.request.contextPath}/order_goPay?oid=${order.oid}">前去付款</a>
                     </c:when>
                     <c:when test="${order.state==2}">
                         已付款
@@ -74,7 +74,7 @@
                 <th>价格</th>
                 <th>数量</th>
                 <th>小计</th>
-                <th>操作</th>
+
             </tr>
 
             <tr>
@@ -99,32 +99,30 @@
                 <td width="140">
                     <span class="subtotal">￥${orderItem.subtotal}</span>
                 </td>
-                <td>
-                    <a href="${pageContext.request.contextPath}/order_remove.action?pid=${orderItem.product.pid}" class="delete">删除</a>
-                </td>
+
             </tr>
             </c:forEach>
             </c:forEach>
             </tbody>
-            <%--导航条--%>
-            <div class="pagination">
-                <a class="firstPage" href="${pageContext.request.contextPath}/order_showMyOrder.action?pageNow=1">&nbsp;</a>
-                <c:if test="${pageBean.pageNow>1}">
-                    <a class="previousPage" href="${pageContext.request.contextPath}/order_showMyOrder.action?pageNow=${pageBean.pageNow-1}">&nbsp;</a>
-                </c:if>
-
-                <c:forEach  begin="1" end="${pageBean.pageCount}" var="i">
-                    <%--<span class="currentPage">1</span>--%>
-                    <a href="${pageContext.request.contextPath}/order_showMyOrder.action?pageNow=${i}">${i}</a>
-                </c:forEach>
-
-                <c:if test="${pageBean.pageNow<pageBean.pageCount}">
-                    <a class="nextPage" href="${pageContext.request.contextPath}/order_showMyOrder.action?pageNow=${pageBean.pageNow+1}">&nbsp;</a>
-                </c:if>
-
-                <a class="lastPage" href="${pageContext.request.contextPath}/order_showMyOrder.action?pageNow=${pageBean.pageCount}">&nbsp;</a>
-            </div>
         </table>
+        <%--导航条--%>
+        <div class="pagination">
+            <a class="firstPage" href="${pageContext.request.contextPath}/order_showMyOrder.action?pageNow=1">&nbsp;</a>
+            <c:if test="${pageBean.pageNow>1}">
+                <a class="previousPage" href="${pageContext.request.contextPath}/order_showMyOrder.action?pageNow=${pageBean.pageNow-1}">&nbsp;</a>
+            </c:if>
+
+            <c:forEach  begin="1" end="${pageBean.pageCount}" var="i">
+                <%--<span class="currentPage">1</span>--%>
+                <a href="${pageContext.request.contextPath}/order_showMyOrder.action?pageNow=${i}">${i}</a>
+            </c:forEach>
+
+            <c:if test="${pageBean.pageNow<pageBean.pageCount}">
+                <a class="nextPage" href="${pageContext.request.contextPath}/order_showMyOrder.action?pageNow=${pageBean.pageNow+1}">&nbsp;</a>
+            </c:if>
+
+            <a class="lastPage" href="${pageContext.request.contextPath}/order_showMyOrder.action?pageNow=${pageBean.pageCount}">&nbsp;</a>
+        </div>
         <dl id="giftItems" class="hidden" style="display: none;">
         </dl>
 

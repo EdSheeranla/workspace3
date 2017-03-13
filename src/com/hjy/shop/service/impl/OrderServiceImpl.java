@@ -39,11 +39,27 @@ public class OrderServiceImpl implements OrderService{
     public PageBean<Order> showOrderByPage(Integer pageNow, Integer userid) {
         hql="select count(*) from Order o where o.user.userid=?";
         setPageBean(pageNow,userid);
-        hql="from Order o join o.user u where u.userid = ? order by ordertime desc";
+        hql="from Order o  where o.user.userid = ? order by ordertime desc";
         List<Order> orderList=orderDao.queryOrderByPage(hql,pageNow,pageSize,userid);
         pageBean.setList(orderList);
         return pageBean;
     }
+
+    @Override
+    public Order queryByOid(Integer oid) {
+        return orderDao.queryByOid(oid);
+    }
+
+    @Override
+    public Order update(Order order) {
+        Order currentOrder=orderDao.queryByOid(order.getOid());
+        currentOrder.setName(order.getName());
+        currentOrder.setTelnum(order.getTelnum());
+        currentOrder.setAddress(order.getAddress());
+        orderDao.update(currentOrder);
+        return currentOrder;
+    }
+
     private void setPageBean(int pageNow,int id){
         pageBean.setPageNow(pageNow);
         columnCout = orderDao.queryPageCount(hql,id);

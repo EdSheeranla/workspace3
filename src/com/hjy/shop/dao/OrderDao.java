@@ -42,8 +42,15 @@ public class OrderDao  {
         int end = pageSize;
         String[] parameters={userid+""};
         List<Order> list = hibernateTemplate.execute(new HibernateCallBackUtil<Order>(start,end,hql,parameters));
-        System.out.println(list);
         return list;
 
+    }
+
+    public Order queryByOid(Integer oid) {
+        return hibernateTemplate.load(Order.class,oid);
+    }
+
+    public void update(Order currentOrder) {
+        hibernateTemplate.update(currentOrder);
     }
 }

@@ -30,6 +30,7 @@
             <result name="goLoginPage" type="redirectAction">user_loginPage.action</result>
             <result name="goOrderPage">/WEB-INF/jsp/orderPage.jsp</result>
             <result name="showMyOrder">/WEB-INF/jsp/orderList.jsp</result>
+            <result name="goPay">/WEB-INF/jsp/orderPage.jsp</result>
         </action>
         <!--商品模块-->
         <action name="product_*" class="com.hjy.shop.action.ProductAction" method="{1}">

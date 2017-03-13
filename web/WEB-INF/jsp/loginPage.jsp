@@ -54,7 +54,11 @@
                                 用户名/E-mail:
                             </th>
                             <td>
-                                <input type="text" id="username" name="username" class="text" maxlength="20">
+                                <c:if test="${cookie.namecookie not eq null}">
+                                    <input type="text" id="username" name="username" class="text" maxlength="20">
+
+                                </c:if>
+
 
                             </td>
                         </tr>

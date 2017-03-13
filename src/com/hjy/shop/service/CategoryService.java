@@ -10,4 +10,12 @@ import java.util.List;
 
 public interface CategoryService {
     List<Category> queryAll();
+
+    Category queryByCid(Integer cid);
+
+    void update(Category currentCategory);
+
+    void deleteByCid(Integer cid);
+
+    void add(Category category);
 }

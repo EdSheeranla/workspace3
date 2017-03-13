@@ -2,11 +2,13 @@ package com.hjy.shop.service.impl;
 
 import com.hjy.shop.dao.ProductDao;
 import com.hjy.shop.dto.PageBean;
+import com.hjy.shop.entity.CategorySecond;
 import com.hjy.shop.entity.Product;
 import com.hjy.shop.service.ProductService;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -65,6 +67,38 @@ public class ProductServiceImpl implements ProductService {
         List<Product> productList=productDao.queryProductByPage(hql,pageNow,pageSize,csid);
         pageBean.setList(productList);
         return pageBean;
+    }
+
+    @Override
+    public PageBean<Product> queryAllProductByPage(Integer pageNow) {
+        hql="select count(*) from Product ";
+        pageSize=20;
+        columnCout=productDao.queryColunmnCount(hql);
+        pageCount= (columnCout - 1)/pageSize+1;
+        hql="from Product order by pid";
+        List<Product> list=productDao.queryAllProductByPage(hql,pageSize,pageNow);
+        pageBean.setList(list);
+        pageBean.setColumnCount(columnCout);
+        pageBean.setPageCount(pageCount);
+        pageBean.setPageNow(pageNow);
+        pageBean.setPageSize(pageSize);
+        return pageBean;
+    }
+
+    @Override
+    public void delete(Product product) throws SQLException {
+        Product p = productDao.queryById(product.getPid());
+        productDao.delete(p);
+    }
+
+    @Override
+    public void update(Product product) {
+        productDao.update(product);
+    }
+
+    @Override
+    public void save(Product product) {
+        productDao.save(product);
     }
 
     private void setPageBean(int pageNow,int id){

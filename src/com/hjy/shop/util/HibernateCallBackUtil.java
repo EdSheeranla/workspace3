@@ -28,8 +28,10 @@ public class HibernateCallBackUtil<T> implements HibernateCallback<List<T>> {
         Query query = session.createQuery(hql);
         query.setMaxResults(end);
         query.setFirstResult(start);
-        for (int i = 0; i < parameters.length; i++) {
-            query.setString(i, parameters[i]);
+        if(parameters!=null){
+            for (int i = 0; i < parameters.length; i++) {
+                query.setString(i, parameters[i]);
+            }
         }
         return query.list();
     }

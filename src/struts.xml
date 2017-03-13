@@ -6,6 +6,9 @@
 
     <!--首页面action-->
     <package name="index" namespace="/" extends="struts-default">
+        <interceptors>
+            <interceptor name="adminItercptor" class="com.hjy.shop.intercptor.AdminIntercptor"/>
+        </interceptors>
         <!--首页面模块-->
         <action name="index_*" class="com.hjy.shop.action.IndexAction" method="{1}">
             <result>/WEB-INF/jsp/index.jsp</result>
@@ -42,5 +45,29 @@
         </action>
         <action name="checkcode" class="com.hjy.shop.action.CheckCodeAction"/>
 
+
+        <!--后台管理模块-->
+        <action name="admin_*" class="com.hjy.shop.action.AdminAction" method="{1}">
+
+            <interceptor-ref name="adminItercptor"/>
+            <interceptor-ref name="defaultStack"/>
+
+            <result name="loginPage">/WEB-INF/admin/index.jsp</result>
+            <result name="loginfail">/WEB-INF/admin/index.jsp</result>
+            <result name="loginsuccess">/WEB-INF/admin/home.jsp</result>
+        </action>
+        <action name="admin*_*" method="{2}" class="com.hjy.shop.action.admin.Admin{1}Action" >
+            <interceptor-ref name="adminItercptor"/>
+            <interceptor-ref name="defaultStack"/>
+
+            <result name="Category{2}">/admin/category/{2}.jsp</result>
+            <result name="CategorySecond{2}">/admin/categorysecond/{2}.jsp</result>
+            <result name="Product{2}">/admin/product/{2}.jsp</result>
+            <result name="back" type="redirectAction">adminCategory_list.action</result>
+            <result name="backCategorySecond" type="redirectAction">adminCategorySecond_list.action?pageNow=1</result>
+            <result name="backProduct" type="redirectAction">adminProduct_list.action?pageNow=1</result>
+            <result name="input">adminProduct_edit.action</result>
+        </action>
+        <!--进行拦截器的配置-->
     </package>
 </struts>

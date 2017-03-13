@@ -36,6 +36,7 @@
                 <value>com/hjy/shop/entity/User.hbm.xml</value>
                 <value>com/hjy/shop/entity/Order.hbm.xml</value>
                 <value>com/hjy/shop/entity/OrderItem.hbm.xml</value>
+                <value>com/hjy/shop/entity/AdminUser.hbm.xml</value>
             </list>
         </property>
         <property name="hibernateProperties">

@@ -15,7 +15,9 @@ import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -75,4 +77,32 @@ public class ProductDao {
     }
 
 
+    public int queryColunmnCount(String hql) {
+        List list=hibernateTemplate.find(hql);
+        if(list.size()==0||list==null){
+            return 0;
+        }else {
+            Number number= (Number) list.get(0);
+            return number.intValue();
+        }
+    }
+
+    public List<Product> queryAllProductByPage(String hql, int pageSize, Integer pageNow) {
+        int start=(pageNow-1)*pageSize;
+        List<Product> list=hibernateTemplate.execute(new HibernateCallBackUtil<Product>(start,pageSize,hql,null));
+        return list;
+    }
+
+    public void delete(Product product) throws SQLException{
+            hibernateTemplate.delete(product);
+
+    }
+
+    public void update(Product product) {
+        hibernateTemplate.update(product);
+    }
+
+    public void save(Product product) {
+        hibernateTemplate.save(product);
+    }
 }

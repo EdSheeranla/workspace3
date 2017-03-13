@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
@@ -23,6 +24,16 @@ public class UserAction extends ActionSupport implements ModelDriven {
     private UserService userService;
     private String captcha;
 
+    public void setIsRememberUsername(String isRememberUsername) {
+        this.isRememberUsername = isRememberUsername;
+    }
+
+    public void setUser(User user) {
+
+        this.user = user;
+    }
+
+    private String isRememberUsername;
     public String getCaptcha() {
         return captcha;
     }
@@ -85,6 +96,7 @@ public class UserAction extends ActionSupport implements ModelDriven {
         return SUCCESS;
     }
 
+
     /**
      *完成用户登陆操作
      */
@@ -97,6 +109,10 @@ public class UserAction extends ActionSupport implements ModelDriven {
         }
         User loginUser=userService.login(user);
         if(loginUser!=null){
+            if(isRememberUsername.equals(true))
+            {
+                saveUsername(loginUser);
+            }
             session.setAttribute("loginUser",loginUser);
             return "loginsuccess";
         }else {
@@ -104,7 +120,10 @@ public class UserAction extends ActionSupport implements ModelDriven {
             return "loginfail";
         }
     }
-
+    private void saveUsername(User user){
+        Cookie nameCookie = new Cookie("username",user.getName());
+        ServletActionContext.getResponse().addCookie(nameCookie);
+    }
     /**
      * 用户退出登陆操作
      */

@@ -25,4 +25,16 @@ public class CategoryDao {
         List<Category> categoryList= (List<Category>) hibernateTemplate.find("from Category");
         return categoryList;
     }
+
+    public Category queryByCid(Integer cid) {
+        return hibernateTemplate.load(Category.class,cid);
+    }
+
+    public void save(Category currentCategory) {
+        hibernateTemplate.save(currentCategory);
+    }
+
+    public void delete(Category category) {
+        hibernateTemplate.delete(category);
+    }
 }

@@ -3,21 +3,20 @@ package com.hjy.shop.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
  * Created by admin on 2017/3/9.
  */
-@Entity(name = "CategorySecond")
-public class CategorySecond {
+public class CategorySecond implements Serializable{
     private Integer csid;
     private String csname;
     private Category category;
     private Set<Product> productSet=new HashSet<Product>();
 
 
-    @OneToMany(cascade=CascadeType.ALL,mappedBy = "categorySecond")
     public Set<Product> getProductSet() {
         return productSet;
     }
@@ -26,9 +25,6 @@ public class CategorySecond {
         this.productSet = productSet;
     }
 
-    @Id
-    @GeneratedValue(generator = "paymentableGenerator")
-    @GenericGenerator(name = "paymentableGenerator", strategy = "increment")
     public Integer getCsid() {
         return csid;
     }
@@ -49,8 +45,6 @@ public class CategorySecond {
         this.category = category;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "cid")
     public Category getCategory() {
         return category;
     }

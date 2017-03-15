@@ -34,7 +34,9 @@ public class AdminAction extends ActionSupport implements ModelDriven<AdminUser>
             this.addActionError("用户名或者密码错误!!");
             return "loginfail";
         }
-        ServletActionContext.getRequest().getSession().setAttribute("loginAdminUser",loginAdminUser);
+        ServletActionContext.getServletContext().setAttribute("loginAdminUser",loginAdminUser);
+//        ServletActionContext.getRequest().getSession().setAttribute("loginAdminUser",loginAdminUser);
+
         return "loginsuccess";
     }
     @Override

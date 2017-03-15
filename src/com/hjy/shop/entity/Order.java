@@ -1,4 +1,5 @@
 package com.hjy.shop.entity;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -7,7 +8,7 @@ import java.util.Set;
  * Created by sheeran on 2017/3/12.
  * 创建一个表单类
  */
-public class Order {
+public class Order implements Serializable{
     private Integer oid;
     private Double total;
     private Date ordertime;

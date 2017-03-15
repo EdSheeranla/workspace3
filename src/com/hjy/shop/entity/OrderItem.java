@@ -1,12 +1,13 @@
 package com.hjy.shop.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by sheeran on 2017/3/12.
  * 创建一个表单细节类
  */
-public class OrderItem {
+public class OrderItem implements Serializable{
    private Integer itemid;
    private Integer count;
    private Double subtotal;

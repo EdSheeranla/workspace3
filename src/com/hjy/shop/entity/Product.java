@@ -3,16 +3,14 @@ package com.hjy.shop.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by admin on 2017/3/9.
  */
-@Entity(name = "Product")
-public class Product {
-    @Id
-    @GeneratedValue(generator = "paymentableGenerator")
-    @GenericGenerator(name="paymentableGenerator",strategy = "increment")
+public class Product implements Serializable{
+
     private Integer pid;
     private String pname;
     private Double market_price;
@@ -87,8 +85,7 @@ public class Product {
     public void setPdate(Date pdate) {
         this.pdate = pdate;
     }
-    @ManyToOne
-    @JoinColumn(name = "csid")
+
     public CategorySecond getCategorySecond() {
         return categorySecond;
     }

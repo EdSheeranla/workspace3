@@ -120,7 +120,7 @@ public class UserAction extends ActionSupport implements ModelDriven {
                 }
             }
             session.setAttribute("loginUser",loginUser);
-            return "loginsuccess";
+            return "back";
         }else {
             this.addActionError("用户名或密码错误");
             return "loginfail";
@@ -136,7 +136,7 @@ public class UserAction extends ActionSupport implements ModelDriven {
     public String logout(){
         ServletActionContext.getRequest().getSession().invalidate();
 
-        return "logout";
+        return "back";
     }
     public Object getModel() {
         return user;

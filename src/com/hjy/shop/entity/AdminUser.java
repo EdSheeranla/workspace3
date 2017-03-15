@@ -1,9 +1,11 @@
 package com.hjy.shop.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by sheeran on 2017/3/13.
  */
-public class AdminUser {
+public class AdminUser implements Serializable{
     private Integer adminid;
     private String name;
     private String password;

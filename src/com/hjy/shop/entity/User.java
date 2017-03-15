@@ -5,6 +5,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -12,8 +13,8 @@ import java.util.Set;
 /**
  * Created by admin on 2017/3/8.
  */
-@Entity
-public class User {
+
+public class User implements Serializable{
     private Integer userid;
     private String username;
     private String name;
@@ -52,9 +53,7 @@ public class User {
         this.username = username;
     }
 
-    @Id
-    @GeneratedValue(generator = "paymentableGenerator")
-    @GenericGenerator(name = "paymentableGenerator", strategy = "increment")
+
     public Integer getUserid() {
         return userid;
     }

@@ -3,6 +3,7 @@ package com.hjy.shop.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,7 +11,7 @@ import java.util.Set;
  * Created by admin on 2017/3/9.
  */
 @Entity(name = "Category")
-public class Category {
+public class Category implements Serializable{
     private Integer cid;
     private String cname;
 

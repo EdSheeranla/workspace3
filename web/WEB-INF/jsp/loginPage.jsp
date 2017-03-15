@@ -54,12 +54,13 @@
                                 用户名/E-mail:
                             </th>
                             <td>
-                                <c:if test="${cookie.namecookie not eq null}">
-                                    <input type="text" id="username" name="username" class="text" maxlength="20">
 
+                                <c:if test="${not empty cookie.username}">
+                                    <input type="text" id="username" name="username" value="${cookie.username.value}" class="text" maxlength="20">
                                 </c:if>
-
-
+                                <c:if test="${empty cookie.username}">
+                                    <input type="text" id="username" name="username"  class="text" maxlength="20">
+                                </c:if>
                             </td>
                         </tr>
                         <tr>

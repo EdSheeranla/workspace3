@@ -6,10 +6,14 @@
 
     <!--首页面action-->
     <package name="index" namespace="/" extends="struts-default">
+
         <interceptors>
             <interceptor name="adminItercptor" class="com.hjy.shop.intercptor.AdminIntercptor"/>
         </interceptors>
         <!--首页面模块-->
+        <global-results>
+            <result name="back" type="redirectAction">index.action</result>
+        </global-results>
         <action name="index_*" class="com.hjy.shop.action.IndexAction" method="{1}">
             <result>/WEB-INF/jsp/index.jsp</result>
         </action>

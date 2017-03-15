@@ -107,11 +107,17 @@ public class UserAction extends ActionSupport implements ModelDriven {
             this.addActionError("验证码错误");
             return "loginfail";
         }
+        Cookie[] cookies=ServletActionContext.getRequest().getCookies();
+        for(Cookie cookie: cookies){
+            System.out.println(cookie.getName()+"   " + cookie.getValue());
+        }
         User loginUser=userService.login(user);
         if(loginUser!=null){
-            if(isRememberUsername.equals(true))
-            {
-                saveUsername(loginUser);
+            if(isRememberUsername!=null) {
+                if (isRememberUsername.equals(true)) {
+
+                    saveUsername(loginUser);
+                }
             }
             session.setAttribute("loginUser",loginUser);
             return "loginsuccess";
@@ -121,7 +127,7 @@ public class UserAction extends ActionSupport implements ModelDriven {
         }
     }
     private void saveUsername(User user){
-        Cookie nameCookie = new Cookie("username",user.getName());
+        Cookie nameCookie = new Cookie("username",user.getUsername());
         ServletActionContext.getResponse().addCookie(nameCookie);
     }
     /**

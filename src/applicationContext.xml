@@ -26,10 +26,6 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="mappingResources">
             <list>
-                <!--<value>com.hjy.shop.entity.Category</value>-->
-                <!--<value>com.hjy.shop.entity.CategorySecond</value>-->
-                <!--<value>com.hjy.shop.entity.Product</value>-->
-                <!--<value>com.hjy.shop.entity.User</value>-->
                 <value>com/hjy/shop/entity/Product.hbm.xml</value>
                 <value>com/hjy/shop/entity/Category.hbm.xml</value>
                 <value>com/hjy/shop/entity/CategorySecond.hbm.xml</value>
@@ -42,7 +38,6 @@
         <property name="hibernateProperties">
             <value>
                 hibernate.dialect=org.hibernate.dialect.MySQLDialect
-                hibernate.show_sql=true
                 hibernate.hbm2ddl.auto=update
             </value>
         </property>

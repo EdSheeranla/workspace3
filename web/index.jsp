@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: admin
@@ -11,6 +12,12 @@
     <title>$Title$</title>
   </head>
   <body>
+  <%--<% Cookie c1=new Cookie("demo1","demo1");--%>
+<%--//    Cookie c2=new Cookie("demo2","demo2");--%>
+  <%--%>--%>
+
+  <%--${cookie.demo1}--%>
+
   <jsp:forward page="admin_loginPage.action"/>
   </body>
 </html>

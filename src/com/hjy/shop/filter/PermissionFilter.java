@@ -1,8 +1,24 @@
 package com.hjy.shop.filter;
 
+import javax.servlet.*;
+import java.io.IOException;
+
 /**
  * Created by sheeran on 2017/3/15.
  */
-public class PermissionFilter {
+public class PermissionFilter implements Filter {
 
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+
+    }
+
+    @Override
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+    }
+
+    @Override
+    public void destroy() {
+
+    }
 }

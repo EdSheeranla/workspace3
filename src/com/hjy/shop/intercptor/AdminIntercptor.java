@@ -10,6 +10,7 @@ import javax.servlet.ServletRequest;
 /**
  * Created by sheeran on 2017/3/13.
  * 创建一个拦截器用于对后台进行权限管理
+ *interceptor 貌似获取不了session中对象
  */
 public class AdminIntercptor implements Interceptor{
 

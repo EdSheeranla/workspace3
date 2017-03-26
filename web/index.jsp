@@ -17,7 +17,28 @@
   <%--%>--%>
 
   <%--${cookie.demo1}--%>
+  <div id="popupInfo">
+    选项框
+  </div>
+  <center  >
+    <input id="clickme" type="button" onclick="save()" value="点击">
+  </center>
 
-  <jsp:forward page="admin_loginPage.action"/>
+  <%--<jsp:forward page="admin_loginPage.action"/>--%>
+  <script>
+    function save(){
+        alert("保存");
+    }
+//    function Autoclick(){
+//        alert("插件启动");
+////        $("#clickme").click();
+//        $("#popupInfo").siblings("center").children("input").click();
+//        //alert("插件结束");
+//    }
+//    setInterval(Autoclick,1000);
+//    $(function(){
+//
+//    });
+  </script>
   </body>
 </html>

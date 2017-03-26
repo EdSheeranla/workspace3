@@ -3,6 +3,7 @@ package com.hjy.shop.dao;
 import com.hjy.shop.entity.Product;
 import com.hjy.shop.util.HibernateCallBackUtil;
 import com.opensymphony.xwork2.interceptor.Interceptor;
+import org.apache.struts2.ServletActionContext;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -32,6 +33,7 @@ public class ProductDao {
         this.hibernateTemplate = hibernateTemplate;
     }
     public List<Product> queryHotProductByPage(){
+
         DetachedCriteria criteria=DetachedCriteria.forClass(Product.class);
         criteria.add(Restrictions.eq("is_hot",1));
         criteria.addOrder(Order.desc("pdate"));

@@ -30,9 +30,6 @@ public class UserServcieImpl implements UserService {
         try{
             user.setState(0);
             user.setCode(UUIDutil.getUUID()+UUIDutil.getUUID());
-            /**
-             * 这里发送邮件
-             */
             MailUtil.sendMail(user.getEmail(),user.getCode());
             userDao.add(user);
         }catch (Exception e){
